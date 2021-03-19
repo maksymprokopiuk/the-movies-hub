@@ -1,0 +1,49 @@
+.movie-card {
+  border: 1px solid #000;
+  background: #000;
+  border-radius: 5px;
+  width: 220px;
+  height: 400px;
+  margin: 10px 5px;
+  cursor: pointer;
+  position: relative;
+}
+.movie-card:hover {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.movie-card__like_btn {
+  width: 24px;
+  height: 24px;
+  top: 10px;
+  right: 10px;
+  position: absolute;
+}
+
+.movie-card__img {
+  width: 100%;
+  
+  overflow: hidden;
+}
+.movie-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.movie-card__title {
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.movie-card__genre {
+  color: #fff;
+  text-align: center;
+}
+
+.movie-card__year {
+  color: #fff;
+  text-align: center;
+}
