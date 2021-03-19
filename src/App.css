@@ -42,6 +42,10 @@
   margin: 0 auto;
   max-width: 1200px;
   background-color: rgba(255, 99, 71, 0.2);
+}
+
+.movie-card-container {
+  width: 100%;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;

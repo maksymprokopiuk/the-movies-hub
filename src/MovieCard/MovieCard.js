@@ -15,7 +15,8 @@ function MovieCard({movie}) {
       </div>
       <div className="movie-card__title">{movie.title}</div>
       <div className="movie-card__genre">{movie.genre_ids}</div>
-      <div className="movie-card__year">{movie.release_date.split('-')[0]}</div>
+      {/* <div className="movie-card__year">{movie.release_date.split('-')[0]}</div> */}
+      <div className="movie-card__year">{movie.release_date}</div>
     </div>
   )
 }
