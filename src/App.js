@@ -1,80 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './App.css'
-import MovieCard from './MovieCard/MovieCard'
-import PropTypes from 'prop-types'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import HeaderSection from './components/HeaderSection/HeaderSection'
+import Home from './pages/Home/Home'
+import MovieDetail from './pages/MovieDetail/MovieDetail'
+import About from './pages/About/About'
+import Favorites from './pages/Favorites/Favorites'
 
 
 function App() {
-  const [error, setError] = useState(null)
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [movies, setMovies] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [fetching, setFetching] = useState(true)
-  const [totalCount, setTotalCount] = useState(0)
-
-
-  useEffect(() => {
-    // if (fetching) {
-      fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${currentPage}`)
-        .then(res => res.json())
-        .then(
-          (data) => {
-            setIsLoaded(true);
-            setMovies([...movies, ...data.results]);
-            // setCurrentPage(prevState => prevState + 1)
-            setCurrentPage(currentPage + 1)
-            setTotalCount(data.total_results)
-          },
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
-          },
-          setFetching(false)
-        )
-    // }
-  }, [fetching])
-  
-  useEffect(() => {
-    document.addEventListener('scroll', scrollHandler)
-
-    return function () {
-      document.removeEventListener('scroll', scrollHandler)
-    }
-  })
-
-  const scrollHandler = (e) => {
-    if (
-      e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100
-      && movies.length < totalCount
-    ) {
-      setFetching(true)
-    }
-    // console.log('scrollHandler', e.target.documentElement.scrollHeight) // загальна висота сторінки з розрахунком скрола
-    // console.log('scrollTop', e.target.documentElement.scrollTop) // текущее положення скрола від верха сторінки
-    // console.log('innerHeight', window.innerHeight) // висота видимої області сторінки (висота браузера)
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div style={{display: 'flex', justifyContent: 'center', margin: '.5rem'}}><div className="lds-facebook"><div></div><div></div><div></div></div></div>;
-  } else {
     return (
+      <Router>
       <div className="App">
+        <HeaderSection />
         <div className="wrapper">
-          <div className="movie-card-container">
-            {movies.map(movie => {
-              return <MovieCard movie={movie} key={movie.id} />
-            })}
-          </div>
+          <Switch>
+            <Route path='/' exact component={ Home } />
+            <Route path='/favorites' component={ Favorites } />
+            <Route path='/about' component={ About } />
+            <Route path='/:id' exact component={ MovieDetail } />
+          </Switch>
         </div>
       </div>
+      </Router>
     );
-  }
-}
-
-App.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default App

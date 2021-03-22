@@ -1,0 +1,15 @@
+.movie-detail {
+  text-align: center;
+}
+
+.movie-detail__tagline {
+  font-style: italic;
+}
+
+.movie-detail__image {
+  /* border: 1px solid #000; */
+  text-align: center;
+}
+.movie-detail__image img {
+  display: inline-block;
+}
