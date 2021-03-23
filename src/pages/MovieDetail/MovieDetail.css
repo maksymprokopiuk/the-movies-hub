@@ -13,3 +13,17 @@
 .movie-detail__image img {
   display: inline-block;
 }
+
+/* .recommended-movies {
+} */
+
+.recommended-movies__title {
+  font-size: 20px;
+}
+
+.recommended-movies__cards {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
