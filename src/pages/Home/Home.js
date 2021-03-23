@@ -13,6 +13,19 @@ function Home() {
   const [totalCount, setTotalCount] = useState(0)
   const [searchWord, setSearchWord] = useState('')
 
+  const [genres, setGenres] = useState([])
+
+  useEffect(() => {
+    fetchGenres()
+  }, [])
+
+  const fetchGenres = async () => {
+    const fetchGenres = await fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+    )
+    const genres = await fetchGenres.json()
+    setGenres(genres.genres)
+  }
 
   useEffect(() => {
     if (searchWord) {
@@ -96,7 +109,7 @@ function Home() {
           {movies.map(movie => {
             return (
               <Link key={movie.id} to={`/${movie.id}`}>
-                <MovieCard movie={movie} />
+                <MovieCard movie={movie} genres={genres} />
               </Link>
             )
           })}

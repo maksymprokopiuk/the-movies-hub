@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './MovieCard.css'
 // import favouriteLogoBlack from './favorite-black.svg'
 import favouriteLogoWhite from './favorite-white.svg'
 import PropTypes from 'prop-types'
 
-function MovieCard({movie}) {
+function MovieCard({ movie, genres }) {
+  const [genresList, setGenresList] = useState(['no genres'])
+
+  function getNameGenres(movieProps, genresProps) {
+    let newGenres = []
+    for (let i = 0; i < movieProps.genre_ids.length; i++) {
+      newGenres.push(Object.values(genresProps)
+        .filter(item => (item.id === movieProps.genre_ids[i]))
+        .map(genre => genre.name)
+      )
+    }
+    setGenresList(newGenres)
+  }
+
+  useEffect(() => {
+    getNameGenres(movie, genres)
+  }, [])
+
+  
+  // console.log(genresList)
+
   return (
     <div className="movie-card">
       <div className="movie-card__like_btn">
@@ -14,9 +34,10 @@ function MovieCard({movie}) {
         <img src={'https://image.tmdb.org/t/p/w500' + movie.poster_path} alt="Jack" />
       </div>
       <div className="movie-card__title">{movie.title}</div>
-      <div className="movie-card__genre">{movie.genre_ids}</div>
+      {/* <div className="movie-card__genre">{movie.genre_ids}</div> */}
+      <div className="movie-card__genre">{genresList.join(', ')}</div>
       {/* <div className="movie-card__year">{movie.release_date.split('-')[0]}</div> */}
-      <div className="movie-card__year">{movie.release_date}</div>
+      <div className="movie-card__year">{movie.release_date ? movie.release_date.split('-')[0] : 'Not released'}</div>
     </div>
   )
 }
