@@ -11,10 +11,28 @@ function Home() {
   const [currentPage, setCurrentPage] = useState(1)
   const [fetching, setFetching] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
+  const [searchWord, setSearchWord] = useState('')
 
 
   useEffect(() => {
-    // if (fetching) {
+    if (searchWord) {
+      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${searchWord}&page=${currentPage}`)
+        .then(res => res.json())
+        .then(
+          (data) => {
+            setIsLoaded(true);
+            setMovies([...movies, ...data.results]);
+            // setCurrentPage(prevState => prevState + 1)
+            setCurrentPage(currentPage + 1)
+            setTotalCount(data.total_results)
+          },
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          },
+          setFetching(false)
+        )
+    } else {
       fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${currentPage}`)
         .then(res => res.json())
         .then(
@@ -31,8 +49,8 @@ function Home() {
           },
           setFetching(false)
         )
-    // }
-  }, [fetching])
+    }
+  }, [fetching, searchWord])
 
   useEffect(() => {
     document.addEventListener('scroll', scrollHandler)
@@ -54,21 +72,36 @@ function Home() {
     // console.log('innerHeight', window.innerHeight) // висота видимої області сторінки (висота браузера)
   }
 
+  const getSearchWord = () => {
+    setCurrentPage(1)
+    setMovies([])
+    setSearchWord(document.querySelector('#inputSearch').value)
+  }
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
     return <div style={{display: 'flex', justifyContent: 'center', margin: '.5rem'}}><div className="lds-facebook"><div></div><div></div><div></div></div></div>;
   } else {
     return (
-          <div className="movie-card-container">
-            {movies.map(movie => {
-              return (
-                <Link key={movie.id} to={`/${movie.id}`}>
-                  <MovieCard movie={movie} />
-                </Link>
-              )
-            })}
-          </div>
+      <div>
+        <div>
+          
+          <input type="text" name="search" id="inputSearch" />
+          
+          <button onClick={getSearchWord} >Search</button>
+        
+        </div>
+        <div className="movie-card-container">
+          {movies.map(movie => {
+            return (
+              <Link key={movie.id} to={`/${movie.id}`}>
+                <MovieCard movie={movie} />
+              </Link>
+            )
+          })}
+        </div>
+      </div>
     );
   }
 }
