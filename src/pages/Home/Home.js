@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Home.css'
 import MovieCard from '../../components/MovieCard/MovieCard'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 function Home() {
   const [error, setError] = useState(null)
@@ -52,7 +52,6 @@ function Home() {
           (data) => {
             setIsLoaded(true);
             setMovies([...movies, ...data.results]);
-            // setCurrentPage(prevState => prevState + 1)
             setCurrentPage(currentPage + 1)
             setTotalCount(data.total_results)
           },
@@ -108,9 +107,10 @@ function Home() {
         <div className="movie-card-container">
           {movies.map(movie => {
             return (
-              <Link key={movie.id} to={`/${movie.id}`}>
-                <MovieCard movie={movie} genres={genres} />
-              </Link>
+              // <Link key={movie.id} to={`/${movie.id}`}>
+              //   <MovieCard movie={movie} genres={genres} />
+              // </Link>
+                <MovieCard key={movie.id} movie={movie} genres={genres} />
             )
           })}
         </div>
