@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './MovieDetail.css'
 import MovieCard from '../../components/MovieCard/MovieCard'
+import favouriteLogoBlack from '../../img/favorite-black.svg'
+import favouriteLogoWhite from '../../img/favorite-white.svg'
 // import { Link } from 'react-router-dom'
 
 function MovieDetail({ match }) {
@@ -42,18 +44,30 @@ function MovieDetail({ match }) {
   }
   // console.log(recommendedMovies)
 
+  const [currentStatusFav, setCurrentStatusFav] = useState(false)
+
   return (
     <div className='movie-detail'>
+      <div className='movie-detail__container'>
       <div className='movie-detail__title'><h1>{movie.title}</h1></div>
+      <div className="movie-detail__info">
+        <div>Release date: {movie.release_date}</div>
+        <div>Vote reting: {movie.vote_average}</div>
+      </div>
       <div className='movie-detail__tagline'>{movie.tagline}</div>
-      <div>genres: </div>
+      {/* <div>genres: </div> */}
       {/* <div>genres: {Object.values(movie.genres)[0].map(item => item.name)}</div> */}
-      <div className='movie-detail__image'><img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} /></div>
-      <div>overview: {movie.overview}</div>
-      <div>release_date: {movie.release_date}</div>
-      <div>vote_average: {movie.vote_average}</div>
+      <div className='movie-detail__image'>
+      <div className="movie-detail__like_btn">
+        <img src={currentStatusFav ? favouriteLogoBlack : favouriteLogoWhite} alt="Favourite Logo" />
+      </div>
+        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+      </div>
+      <div>Overview:</div>
+      <div className='movie-detail__overview'>{movie.overview}</div>
+      </div>
       <div className='recommended-movies'>
-        <div className='recommended-movies__title'>списком рекомендованих (схожих) фільмів</div>
+        <div className='recommended-movies__title'>Recommended movies</div>
         <div className='recommended-movies__cards'>
           {recommendedMovies.map(movie => {
             return (
@@ -68,6 +82,7 @@ function MovieDetail({ match }) {
           })}
         </div>
       </div>
+      
     </div>
   )
 }

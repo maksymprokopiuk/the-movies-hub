@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './MovieCard.css'
-import favouriteLogoBlack from './favorite-black.svg'
-import favouriteLogoWhite from './favorite-white.svg'
+import favouriteLogoBlack from '../../img/favorite-black.svg'
+import favouriteLogoWhite from '../../img/favorite-white.svg'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 

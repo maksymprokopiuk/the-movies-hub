@@ -1,24 +1,50 @@
 .movie-detail {
   text-align: center;
+  
+}
+
+.movie-detail__container {
+  
+  width: 800px;
+  margin: 0 auto;
+}
+
+.movie-detail__info {
+  display: flex;
+  justify-content:space-around;
+  margin: 20px 0;
 }
 
 .movie-detail__tagline {
   font-style: italic;
+  margin: 0 0 20px 0;
 }
 
 .movie-detail__image {
   /* border: 1px solid #000; */
   text-align: center;
+  position: relative;
+}
+
+.movie-detail__like_btn {
+  width: 24px;
+  height: 24px;
+  top: 10px;
+  right: 160px;
+  position: absolute;
 }
 .movie-detail__image img {
   display: inline-block;
 }
 
-/* .recommended-movies {
-} */
+
+.movie-detail__overview {
+  text-align: justify;
+}
 
 .recommended-movies__title {
   font-size: 20px;
+  margin: 20px 0 0 0;
 }
 
 .recommended-movies__cards {
