@@ -11,7 +11,8 @@ function MovieCard({ movie, genres }) {
 
   function getNameGenres(movieProps, genresProps) {
     let newGenres = []
-    for (let i = 0; i < movieProps.genre_ids.length; i++) {
+    const count = movieProps.genre_ids.length >= 2 ? 2 : movieProps.genre_ids.length
+    for (let i = 0; i < count; i++) {
       newGenres.push(Object.values(genresProps)
         .filter(item => (item.id === movieProps.genre_ids[i]))
         .map(genre => genre.name)

@@ -60,9 +60,10 @@ function MovieDetail({ match }) {
               // <Link key={movie.id} to={`/${movie.id}`}>
               //   <MovieCard movie={movie} />
               // </Link>
-              <a key={movie.id} href={`/${movie.id}`}>
-              <MovieCard movie={movie} genres={genres} />
-              </a>
+              // <a key={movie.id} href={`/${movie.id}`}>
+              // <MovieCard movie={movie} genres={genres} />
+              // </a>
+              <MovieCard key={movie.id} movie={movie} genres={genres} />
             )
           })}
         </div>
