@@ -97,7 +97,7 @@ function Home() {
   } else {
     return (
       <div>
-        <div>
+        <div className="search-block">
           
           <input type="text" name="search" id="inputSearch" />
           

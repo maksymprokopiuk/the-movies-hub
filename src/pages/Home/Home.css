@@ -5,6 +5,16 @@
   flex-wrap: wrap;
 }
 
+.search-block {
+  padding: 10px;
+  text-align: center;
+}
+
+.search-block input {
+  margin: 0 10px 0 0;
+  width: 300px;
+}
+
 /* Loader */
 .lds-facebook {
   display: inline-block;
