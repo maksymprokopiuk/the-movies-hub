@@ -29,12 +29,18 @@ function MovieCard({ movie, genres }) {
   const [currentStatusFav, setCurrentStatusFav] = useState(false)
   //* localstorage END
 
+  const styles = {
+    link: {
+      textDecoration: 'none',
+    }
+  }
+
   return (
     <div className="movie-card">
       <div className="movie-card__like_btn">
         <img src={currentStatusFav ? favouriteLogoBlack : favouriteLogoWhite} alt="Favourite Logo" />
       </div>
-      <Link to={`/${movie.id}`}>
+      <Link style={styles.link} to={`/${movie.id}`}>
         <div className="movie-card__img" >
           <img src={'https://image.tmdb.org/t/p/w500' + movie.poster_path} alt="Jack" />
         </div>
