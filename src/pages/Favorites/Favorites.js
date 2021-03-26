@@ -1,10 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Favorites.css'
 import MovieCard from '../../components/MovieCard/MovieCard'
 import { Link } from 'react-router-dom'
 
 function Favorites(props) {
-  const [genres] = useState([props.genres])
+  const [genres, setGenres] = useState([])
+
+
+  const fetchGenres = async () => {
+    const fetchGenres = await fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+    )
+    const genres = await fetchGenres.json()
+    setGenres(genres.genres)
+  }
+
+  useEffect(() => {
+    fetchGenres()
+  }, [])
 
   if (!(props.movies.length > 0)) {
     return (
