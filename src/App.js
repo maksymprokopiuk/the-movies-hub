@@ -8,9 +8,9 @@ import Favorites from './pages/Favorites/Favorites'
 
 
 function App() {
-  const [genres, setGenres] = useState([]) // жанри для додавання в MovieCard component
-  const [movies, setMovies] = useState(getMoviesLocalStorage) // загрузка фільмів з ЛокалСторедж
-  const [savedMoviesId] = useState(getSavedIdLocalStorage) // загрузка ID збережених фільмів для фавіконок
+  const [genres, setGenres] = useState([])
+  const [movies, setMovies] = useState(getMoviesLocalStorage)
+  const [savedMoviesId] = useState(getSavedIdLocalStorage)
 
 
 
@@ -30,22 +30,21 @@ function App() {
 
 
 
-  // загрузка улублених фільмів з ЛокалСторедж
   function getMoviesLocalStorage() {
     return localStorage.getItem('movies') ? JSON.parse(localStorage.getItem('movies')) : []
   }
-  // додавання/віднімання фільму в улюбленні
+  
   function setMovieWithSave(newMovie) {
     setMovies(newMovie);
     localStorage.setItem('movies', JSON.stringify(newMovie))
   }
-  // видалення фільму з улюблених
+  
   function removeMovie(id) {
     const removedArr = [...movies].filter(movie => movie.id !== id);
     setMovieWithSave(removedArr);
   };
 
-  // дитина передає об'єкт в подію для додавання/видалення
+  
   function addOrDelMovies(movie) {
     let checkMovieAtStorage = movies.find(item => item.id === movie[0].id)
     if (!checkMovieAtStorage) {
@@ -59,7 +58,6 @@ function App() {
 
 
 
-  // загрузка ID збережених фільмів в масив для фавіконок
   function getSavedIdLocalStorage() {
     if (localStorage.getItem('movies')) {
       const movies = JSON.parse(localStorage.getItem('movies'))
