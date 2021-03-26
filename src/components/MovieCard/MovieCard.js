@@ -48,9 +48,9 @@ function MovieCard({ movie, genres }) {
             alt={movie.title}
           />
         </div>
-        <div className="movie-card__title">{movie.title}</div>
+        <div className="movie-card__title">{movie.title ? movie.title : 'no title'}</div>
         {/* <div className="movie-card__genre">{movie.genre_ids}</div> */}
-        <div className="movie-card__genre">{genresList.join(', ')}</div>
+        <div className="movie-card__genre">{genresList.length > 0 ? genresList.join(', ') : 'no genres'}</div>
         {/* <div className="movie-card__year">{movie.release_date.split('-')[0]}</div> */}
         <div className="movie-card__year">{movie.release_date ? movie.release_date.split('-')[0] : 'Not released'}</div>
       </Link>
