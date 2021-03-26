@@ -9,29 +9,29 @@ import Favorites from './pages/Favorites/Favorites'
 
 function App() {
   const [movies, setMovies] = useState([
-    {
-      id: 791373,
-      title: "Zack Snyder's Justice League",
-      poster_path: "/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg",
-      genre_ids: [
-        28,
-        12,
-        14,
-        878
-      ],
-      release_date: "2021-03-18",
-    },
-    {
-      id: 581389,
-      title: "Space Sweepers",
-      poster_path: "/lykPQ7lgrLJPwLlSyetVXsl2wDf.jpg",
-      genre_ids: [
-        18,
-        14,
-        878,
-      ],
-      release_date: "2021-02-05",
-    }
+    // {
+    //   id: 791373,
+    //   title: "Zack Snyder's Justice League",
+    //   poster_path: "/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg",
+    //   genre_ids: [
+    //     28,
+    //     12,
+    //     14,
+    //     878
+    //   ],
+    //   release_date: "2021-03-18",
+    // },
+    // {
+    //   id: 581389,
+    //   title: "Space Sweepers",
+    //   poster_path: "/lykPQ7lgrLJPwLlSyetVXsl2wDf.jpg",
+    //   genre_ids: [
+    //     18,
+    //     14,
+    //     878,
+    //   ],
+    //   release_date: "2021-02-05",
+    // }
   ])
 
   const [genres, setGenres] = useState([])
