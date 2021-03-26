@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 function Favorites(props) {
   const [genres, setGenres] = useState([])
+  const [movies, setMovies] = useState([])
 
 
   const fetchGenres = async () => {
@@ -13,13 +14,15 @@ function Favorites(props) {
     )
     const genres = await fetchGenres.json()
     setGenres(genres.genres)
+    const movies = props.movies
+    setMovies(movies)
   }
 
   useEffect(() => {
     fetchGenres()
   }, [])
 
-  if (!(props.movies.length > 0)) {
+  if (!(movies.length > 0)) {
     return (
     <div className="favorite">
       <h3>
@@ -30,7 +33,7 @@ function Favorites(props) {
   } else {
     return (
       <div className="movie-card-container">
-        {props.movies.map(movie => {
+        {movies.map(movie => {
             return (
               <MovieCard
                 key={movie.id}
