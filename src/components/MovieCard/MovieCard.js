@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './MovieCard.css'
+import noimage from '../../img/no-image.jpg'
 import favouriteLogoBlack from '../../img/favorite-black.svg'
 import favouriteLogoWhite from '../../img/favorite-white.svg'
 import PropTypes from 'prop-types'
@@ -42,7 +43,10 @@ function MovieCard({ movie, genres }) {
       </div>
       <Link style={styles.link} to={`/${movie.id}`}>
         <div className="movie-card__img" >
-          <img src={'https://image.tmdb.org/t/p/w500' + movie.poster_path} alt="Jack" />
+          <img
+            src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : noimage}
+            alt={movie.title}
+          />
         </div>
         <div className="movie-card__title">{movie.title}</div>
         {/* <div className="movie-card__genre">{movie.genre_ids}</div> */}

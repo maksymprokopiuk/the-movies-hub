@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import './MovieDetail.css'
 import MovieCard from '../../components/MovieCard/MovieCard'
+import noimage from '../../img/no-image.jpg'
 import favouriteLogoBlack from '../../img/favorite-black.svg'
 import favouriteLogoWhite from '../../img/favorite-white.svg'
-// import { Link } from 'react-router-dom'
+
 
 function MovieDetail({ match }) {
   const [genres, setGenres] = useState([])
@@ -55,13 +56,18 @@ function MovieDetail({ match }) {
         <div>Vote reting: {movie.vote_average}</div>
       </div>
       <div className='movie-detail__tagline'>{movie.tagline}</div>
-      {/* <div>genres: </div> */}
-      {/* <div>genres: {Object.values(movie.genres)[0].map(item => item.name)}</div> */}
       <div className='movie-detail__image'>
       <div className="movie-detail__like_btn">
         <img src={currentStatusFav ? favouriteLogoBlack : favouriteLogoWhite} alt="Favourite Logo" />
       </div>
-        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+        <img
+          src={
+            movie.poster_path
+            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+            : noimage
+          }
+          alt={movie.title}
+        />
       </div>
       <div>Overview:</div>
       <div className='movie-detail__overview'>{movie.overview}</div>

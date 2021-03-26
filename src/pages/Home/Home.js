@@ -79,9 +79,6 @@ function Home() {
     ) {
       setFetching(true)
     }
-    // console.log('scrollHandler', e.target.documentElement.scrollHeight) // загальна висота сторінки з розрахунком скрола
-    // console.log('scrollTop', e.target.documentElement.scrollTop) // текущее положення скрола від верха сторінки
-    // console.log('innerHeight', window.innerHeight) // висота видимої області сторінки (висота браузера)
   }
 
   const getSearchWord = () => {
