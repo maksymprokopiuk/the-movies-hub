@@ -4,7 +4,7 @@ import MovieCard from '../../components/MovieCard/MovieCard'
 import PropTypes from 'prop-types'
 // import { Link } from 'react-router-dom'
 
-function Home() {
+function Home(props) {
   const [error, setError] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [movies, setMovies] = useState([])
@@ -104,10 +104,12 @@ function Home() {
         <div className="movie-card-container">
           {movies.map(movie => {
             return (
-              // <Link key={movie.id} to={`/${movie.id}`}>
-              //   <MovieCard movie={movie} genres={genres} />
-              // </Link>
-                <MovieCard key={movie.id} movie={movie} genres={genres} />
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                genres={genres}
+                addOrDelMovies={props.addOrDelMovies}
+              />
             )
           })}
         </div>

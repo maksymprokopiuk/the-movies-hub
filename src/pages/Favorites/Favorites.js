@@ -18,7 +18,12 @@ function Favorites(props) {
       <div className="movie-card-container">
         {props.movies.map(movie => {
             return (
-              <MovieCard key={movie.id} movie={movie} genres={genres} />
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                genres={genres}
+                addOrDelMovies={props.addOrDelMovies}
+              />
             )
           })}
       </div>

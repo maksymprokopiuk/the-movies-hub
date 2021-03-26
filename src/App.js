@@ -8,31 +8,37 @@ import Favorites from './pages/Favorites/Favorites'
 
 
 function App() {
-  const [movies, setMovies] = useState([
-    // {
-    //   id: 791373,
-    //   title: "Zack Snyder's Justice League",
-    //   poster_path: "/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg",
-    //   genre_ids: [
-    //     28,
-    //     12,
-    //     14,
-    //     878
-    //   ],
-    //   release_date: "2021-03-18",
-    // },
-    // {
-    //   id: 581389,
-    //   title: "Space Sweepers",
-    //   poster_path: "/lykPQ7lgrLJPwLlSyetVXsl2wDf.jpg",
-    //   genre_ids: [
-    //     18,
-    //     14,
-    //     878,
-    //   ],
-    //   release_date: "2021-02-05",
-    // }
-  ])
+  const [movies, setMovies] = useState(getMoviesLocalStorage);
+
+  function getMoviesLocalStorage() {
+    return localStorage.getItem('movies') ? 
+    JSON.parse(localStorage.getItem('movies')) : 
+    []
+  }
+
+  const setMovieWithSave = (newMovie) => {
+    setMovies(newMovie);
+    localStorage.setItem('movies', JSON.stringify(newMovie))
+  }
+
+  const removeMovie = (id) => {
+    const removedArr = [...movies].filter(movie => movie.id !== id);
+    setMovieWithSave(removedArr);
+  };
+
+// ===============================
+  const addOrDelMovies = (movie) => {
+    let checkMovieAtStorage = movies.find(item => item.id === movie[0].id)
+    if (!checkMovieAtStorage) {
+      setMovieWithSave([...movies, ...movie])
+    } else {
+      removeMovie(movie[0].id)
+    }
+
+    // console.log('checkMovieAtStorage', checkMovieAtStorage)
+    
+  }
+  // ===============================
 
   const [genres, setGenres] = useState([])
 
@@ -54,13 +60,36 @@ function App() {
         <HeaderSection />
         <div className="wrapper">
           <Switch>
-            <Route path='/' exact component={ Home } />
-            {/* <Route path='/favorites' component={ Favorites } /> */}
+            {/* <Route path='/' exact component={ Home } /> */}
+            <Route
+              path='/'
+              exact
+              render={ props => 
+                <Home
+                addOrDelMovies={addOrDelMovies}
+                  {...props}
+                />
+              }
+            />
             <Route
               path='/favorites'
-              render={props => <Favorites movies={movies} genres={genres} {...props} />}
+              render={props => 
+                <Favorites 
+                  movies={movies}
+                  genres={genres}
+                  addOrDelMovies={addOrDelMovies}
+                  {...props}
+                />}
             />
-            <Route path='/:id' exact component={ MovieDetail } />
+            <Route
+              path='/:id'
+              exact
+              render={props =>
+                <MovieDetail
+                addOrDelMovies={addOrDelMovies}
+                {...props}
+                />} 
+            />
           </Switch>
         </div>
       </div>

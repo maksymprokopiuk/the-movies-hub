@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 
-function MovieCard({ movie, genres }) {
+function MovieCard({ movie, genres, addOrDelMovies }) {
   const [genresList, setGenresList] = useState(['no genres'])
 
   function getNameGenres(movieProps, genresProps) {
@@ -36,9 +36,21 @@ function MovieCard({ movie, genres }) {
     }
   }
 
+  const onFavorite = () => {
+    addOrDelMovies(
+      [{
+        id: movie.id,
+        poster_path: movie.poster_path,
+        title: movie.title,
+        genre_ids: movie.genre_ids,
+        release_date: movie.release_date,
+      }]
+    )
+  }
+
   return (
     <div className="movie-card">
-      <div className="movie-card__like_btn">
+      <div className="movie-card__like_btn" onClick={onFavorite}>
         <img src={currentStatusFav ? favouriteLogoBlack : favouriteLogoWhite} alt="Favourite Logo" />
       </div>
       <Link style={styles.link} to={`/${movie.id}`}>
