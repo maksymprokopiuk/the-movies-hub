@@ -45,6 +45,7 @@ function MovieDetail(props) {
           setFetching(false)
         )
       fetchRecommendedMovies()
+      window.scrollTo(0, 0);
   }, [fetching, props.match.url])
 
 
