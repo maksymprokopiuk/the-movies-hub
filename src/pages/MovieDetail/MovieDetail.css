@@ -18,6 +18,10 @@
   margin: 0 0 20px 0;
 }
 
+.movie-detail__genres {
+  margin: 0 0 20px 0;
+}
+
 .movie-detail__image {
   text-align: center;
   position: relative;

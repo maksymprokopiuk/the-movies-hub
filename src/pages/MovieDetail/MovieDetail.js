@@ -9,6 +9,7 @@ import favouriteLogoWhite from '../../img/favorite-white.svg'
 function MovieDetail(props) {
   const [genres, setGenres] = useState([])
   const [movie, setMovie] = useState({})
+  const [currentMovieGenres, setCurrentMovieGenres] = useState([])
   const [recommendedMovies, setRecommendedMovies] = useState([])
   const [currentStatusFav] = useState(false)
 
@@ -32,6 +33,7 @@ function MovieDetail(props) {
   const fetchMovie = async () => {
     const fetchMovie = await fetch(`https://api.themoviedb.org/3/movie/${props.match.params.id}?api_key=${process.env.REACT_APP_API_KEY}`)
     const movie = await fetchMovie.json()
+    setCurrentMovieGenres(movie.genres.map(item => item.name))
     setMovie(movie)
   }
   const fetchRecommendedMovies = async () => {
@@ -68,9 +70,10 @@ function MovieDetail(props) {
       <div className='movie-detail__title'><h1>{movie.title}</h1></div>
       <div className="movie-detail__info">
         <div>Release date: {movie.release_date ? movie.release_date : 'Not realeased'}</div>
-        <div>Vote reting: {movie.vote_average}</div>
+        <div>Vote rating: {movie.vote_average}</div>
       </div>
       <div className='movie-detail__tagline'>{movie.tagline}</div>
+      <div className='movie-detail__genres'>genres: {currentMovieGenres.join(', ')}</div>
       <div className='movie-detail__image'>
       <div className="movie-detail__like_btn" onClick={onFavorite}>
         <img src={currentStatusFav ? favouriteLogoBlack : favouriteLogoWhite} alt="Favourite Logo" />
