@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Home.css'
 import MovieCard from '../../components/MovieCard/MovieCard'
 import PropTypes from 'prop-types'
-// import { Link } from 'react-router-dom'
+
 
 function Home(props) {
   const [error, setError] = useState(null)
@@ -12,12 +12,9 @@ function Home(props) {
   const [fetching, setFetching] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
   const [searchWord, setSearchWord] = useState('')
-
   const [genres, setGenres] = useState([])
 
-  useEffect(() => {
-    fetchGenres()
-  }, [])
+
 
   const fetchGenres = async () => {
     const fetchGenres = await fetch(
@@ -28,6 +25,19 @@ function Home(props) {
   }
 
   useEffect(() => {
+    fetchGenres()
+  }, [])
+
+
+
+
+  function getSearchWord() {
+    setCurrentPage(1)
+    setMovies([])
+    setSearchWord(document.querySelector('#inputSearch').value)
+  }
+
+  useEffect(() => {
     if (searchWord) {
       fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${searchWord}&page=${currentPage}`)
         .then(res => res.json())
@@ -35,7 +45,6 @@ function Home(props) {
           (data) => {
             setIsLoaded(true);
             setMovies([...movies, ...data.results]);
-            // setCurrentPage(prevState => prevState + 1)
             setCurrentPage(currentPage + 1)
             setTotalCount(data.total_results)
           },
@@ -64,9 +73,11 @@ function Home(props) {
     }
   }, [fetching, searchWord])
 
+
+
+
   useEffect(() => {
     document.addEventListener('scroll', scrollHandler)
-
     return function () {
       document.removeEventListener('scroll', scrollHandler)
     }
@@ -81,11 +92,8 @@ function Home(props) {
     }
   }
 
-  const getSearchWord = () => {
-    setCurrentPage(1)
-    setMovies([])
-    setSearchWord(document.querySelector('#inputSearch').value)
-  }
+
+
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -95,11 +103,8 @@ function Home(props) {
     return (
       <div>
         <div className="search-block">
-          
           <input type="text" name="search" id="inputSearch" />
-          
           <button onClick={getSearchWord} >Search</button>
-        
         </div>
         <div className="movie-card-container">
           {movies.map(movie => {
@@ -109,7 +114,7 @@ function Home(props) {
                 movie={movie}
                 genres={genres}
                 addOrDelMovies={props.addOrDelMovies}
-                savedMovies={props.savedMovies}
+                savedMoviesId={props.savedMoviesId}
               />
             )
           })}

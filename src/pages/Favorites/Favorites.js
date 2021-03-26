@@ -4,12 +4,13 @@ import MovieCard from '../../components/MovieCard/MovieCard'
 import { Link } from 'react-router-dom'
 
 function Favorites(props) {
-  const [genres, setGenres] = useState([props.genres])
+  const [genres] = useState([props.genres])
 
   if (!(props.movies.length > 0)) {
     return (
     <div className="favorite">
-      <h3>Favorites page is empty. <Link to={'/'}>Let's go to search you favorite movies!</Link>
+      <h3>
+        Favorites page is empty. <Link to={'/'}>Let's go to search you favorite movies!</Link>
       </h3>
     </div>
     )
@@ -23,7 +24,7 @@ function Favorites(props) {
                 movie={movie}
                 genres={genres}
                 addOrDelMovies={props.addOrDelMovies}
-                savedMovies={props.savedMovies}
+                savedMoviesId={props.savedMoviesId}
               />
             )
           })}

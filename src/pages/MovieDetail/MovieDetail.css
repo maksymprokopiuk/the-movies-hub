@@ -1,10 +1,8 @@
 .movie-detail {
   text-align: center;
-  
 }
 
 .movie-detail__container {
-  
   width: 800px;
   margin: 0 auto;
 }
@@ -21,7 +19,6 @@
 }
 
 .movie-detail__image {
-  /* border: 1px solid #000; */
   text-align: center;
   position: relative;
 }
@@ -36,7 +33,6 @@
 .movie-detail__image img {
   display: inline-block;
 }
-
 
 .movie-detail__overview {
   text-align: justify;

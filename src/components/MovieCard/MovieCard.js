@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './MovieCard.css'
+import { Link } from 'react-router-dom'
 import noimage from '../../img/no-image.jpg'
 import favouriteLogoBlack from '../../img/favorite-black.svg'
 import favouriteLogoWhite from '../../img/favorite-white.svg'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 
 
-function MovieCard({ movie, genres, addOrDelMovies, savedMovies }) {
-  const [genresList, setGenresList] = useState(['no genres'])
+function MovieCard({ movie, genres, addOrDelMovies, savedMoviesId }) {
+  const [genresList, setGenresList] = useState([])
+  const [currentStatusFav] = useState(savedMoviesId.includes(movie.id))
 
   function getNameGenres(movieProps, genresProps) {
     let newGenres = []
@@ -25,16 +26,6 @@ function MovieCard({ movie, genres, addOrDelMovies, savedMovies }) {
   useEffect(() => {
     getNameGenres(movie, genres)
   }, [])
-
-  //* localstorage
-  const [currentStatusFav, setCurrentStatusFav] = useState(savedMovies.includes(movie.id))
-  //* localstorage END
-
-  const styles = {
-    link: {
-      textDecoration: 'none',
-    }
-  }
 
   function onFavorite() {
     addOrDelMovies(
@@ -53,7 +44,7 @@ function MovieCard({ movie, genres, addOrDelMovies, savedMovies }) {
       <div className="movie-card__like_btn" onClick={onFavorite}>
         <img src={currentStatusFav ? favouriteLogoBlack : favouriteLogoWhite} alt="Favourite Logo" />
       </div>
-      <Link style={styles.link} to={`/${movie.id}`}>
+      <Link to={`/${movie.id}`}>
         <div className="movie-card__img" >
           <img
             src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : noimage}

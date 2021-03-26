@@ -8,10 +8,11 @@ import favouriteLogoWhite from '../../img/favorite-white.svg'
 
 function MovieDetail(props) {
   const [genres, setGenres] = useState([])
+  const [movie, setMovie] = useState({})
+  const [recommendedMovies, setRecommendedMovies] = useState([])
+  const [currentStatusFav] = useState(false)
 
-  useEffect(() => {
-    fetchGenres()
-  }, [])
+
 
   const fetchGenres = async () => {
     const fetchGenres = await fetch(
@@ -22,20 +23,17 @@ function MovieDetail(props) {
   }
 
   useEffect(() => {
-    fetchMovie()
-    fetchRecommendedMovies()
-  }, [props.match.url])
-  
-  const [movie, setMovie] = useState({})
+    fetchGenres()
+  }, [])
+
+
+
 
   const fetchMovie = async () => {
     const fetchMovie = await fetch(`https://api.themoviedb.org/3/movie/${props.match.params.id}?api_key=${process.env.REACT_APP_API_KEY}`)
     const movie = await fetchMovie.json()
     setMovie(movie)
   }
-
-  const [recommendedMovies, setRecommendedMovies] = useState([])
-
   const fetchRecommendedMovies = async () => {
     const fetchRecommendedMovies = await fetch(
       `https://api.themoviedb.org/3/movie/${props.match.params.id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}&page=1`
@@ -43,9 +41,13 @@ function MovieDetail(props) {
     const movies = await fetchRecommendedMovies.json()
     setRecommendedMovies(movies.results.slice(0, 5))
   }
-  
 
-  const [currentStatusFav, setCurrentStatusFav] = useState(false)
+  useEffect(() => {
+    fetchMovie()
+    fetchRecommendedMovies()
+  }, [props.match.url])
+
+
 
   const onFavorite = () => {
     const genre_ids = movie.genres.map(item => item.id)
@@ -94,7 +96,7 @@ function MovieDetail(props) {
               movie={movie}
               genres={genres}
               addOrDelMovies={props.addOrDelMovies}
-              savedMovies={props.savedMovies}
+              savedMoviesId={props.savedMoviesId}
             />
           ))}
         </div>
