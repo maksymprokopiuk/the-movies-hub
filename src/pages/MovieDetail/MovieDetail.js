@@ -23,8 +23,8 @@ function MovieDetail({ match }) {
   useEffect(() => {
     fetchMovie()
     fetchRecommendedMovies()
-  }, [])
-
+  }, [match.url])
+  
   const [movie, setMovie] = useState({})
 
   const fetchMovie = async () => {
@@ -69,17 +69,9 @@ function MovieDetail({ match }) {
       <div className='recommended-movies'>
         <div className='recommended-movies__title'>Recommended movies</div>
         <div className='recommended-movies__cards'>
-          {recommendedMovies.map(movie => {
-            return (
-              // <Link key={movie.id} to={`/${movie.id}`}>
-              //   <MovieCard movie={movie} />
-              // </Link>
-              // <a key={movie.id} href={`/${movie.id}`}>
-              // <MovieCard movie={movie} genres={genres} />
-              // </a>
-              <MovieCard key={movie.id} movie={movie} genres={genres} />
-            )
-          })}
+          {recommendedMovies.map(movie => (
+            <MovieCard key={movie.id} movie={movie} genres={genres} />
+          ))}
         </div>
       </div>
       
