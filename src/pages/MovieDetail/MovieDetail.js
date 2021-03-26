@@ -12,7 +12,7 @@ function MovieDetail(props) {
   const [fetching, setFetching] = useState(true)
   const [genres, setGenres] = useState([])
   const [movie, setMovie] = useState({})
-  const [currentMovieGenres] = useState([])
+  const [currentMovieGenres, setCurrentMovieGenres] = useState([])
   const [recommendedMovies, setRecommendedMovies] = useState([])
   const [currentStatusFav] = useState(false)
 
@@ -37,6 +37,7 @@ function MovieDetail(props) {
           (data) => {
             setIsLoaded(true)
             setMovie(data)
+            setCurrentMovieGenres(data.genres.map(item => item.name))
           },
           (error) => {
             setIsLoaded(true);
