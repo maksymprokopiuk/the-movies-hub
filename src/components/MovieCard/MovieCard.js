@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 
-function MovieCard({ movie, genres, addOrDelMovies }) {
+function MovieCard({ movie, genres, addOrDelMovies, savedMovies }) {
   const [genresList, setGenresList] = useState(['no genres'])
 
   function getNameGenres(movieProps, genresProps) {
@@ -27,7 +27,7 @@ function MovieCard({ movie, genres, addOrDelMovies }) {
   }, [])
 
   //* localstorage
-  const [currentStatusFav, setCurrentStatusFav] = useState(false)
+  const [currentStatusFav, setCurrentStatusFav] = useState(savedMovies.includes(movie.id))
   //* localstorage END
 
   const styles = {
@@ -36,7 +36,7 @@ function MovieCard({ movie, genres, addOrDelMovies }) {
     }
   }
 
-  const onFavorite = () => {
+  function onFavorite() {
     addOrDelMovies(
       [{
         id: movie.id,
@@ -61,9 +61,7 @@ function MovieCard({ movie, genres, addOrDelMovies }) {
           />
         </div>
         <div className="movie-card__title">{movie.title ? movie.title : 'no title'}</div>
-        {/* <div className="movie-card__genre">{movie.genre_ids}</div> */}
         <div className="movie-card__genre">{genresList.length > 0 ? genresList.join(', ') : 'no genres'}</div>
-        {/* <div className="movie-card__year">{movie.release_date.split('-')[0]}</div> */}
         <div className="movie-card__year">{movie.release_date ? movie.release_date.split('-')[0] : 'Not released'}</div>
       </Link>
     </div>

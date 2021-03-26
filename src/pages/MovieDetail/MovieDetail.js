@@ -94,6 +94,7 @@ function MovieDetail(props) {
               movie={movie}
               genres={genres}
               addOrDelMovies={props.addOrDelMovies}
+              savedMovies={props.savedMovies}
             />
           ))}
         </div>

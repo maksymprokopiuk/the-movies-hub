@@ -9,11 +9,22 @@ import Favorites from './pages/Favorites/Favorites'
 
 function App() {
   const [movies, setMovies] = useState(getMoviesLocalStorage);
+  const [savedMovies, setSavedMovies] = useState(getSavedIdLocalStorage);
 
   function getMoviesLocalStorage() {
     return localStorage.getItem('movies') ? 
     JSON.parse(localStorage.getItem('movies')) : 
     []
+  }
+
+  function getSavedIdLocalStorage() {
+    if (localStorage.getItem('movies')) {
+      const movies = JSON.parse(localStorage.getItem('movies'))
+      const moviesId = movies.map(item => item.id)
+      return moviesId
+    } else {
+      return []
+    }
   }
 
   const setMovieWithSave = (newMovie) => {
@@ -27,16 +38,13 @@ function App() {
   };
 
 // ===============================
-  const addOrDelMovies = (movie) => {
+  function addOrDelMovies(movie) {
     let checkMovieAtStorage = movies.find(item => item.id === movie[0].id)
     if (!checkMovieAtStorage) {
       setMovieWithSave([...movies, ...movie])
     } else {
       removeMovie(movie[0].id)
     }
-
-    // console.log('checkMovieAtStorage', checkMovieAtStorage)
-    
   }
   // ===============================
 
@@ -67,6 +75,7 @@ function App() {
               render={ props => 
                 <Home
                 addOrDelMovies={addOrDelMovies}
+                savedMovies={savedMovies}
                   {...props}
                 />
               }
@@ -78,6 +87,7 @@ function App() {
                   movies={movies}
                   genres={genres}
                   addOrDelMovies={addOrDelMovies}
+                  savedMovies={savedMovies}
                   {...props}
                 />}
             />
@@ -87,6 +97,7 @@ function App() {
               render={props =>
                 <MovieDetail
                 addOrDelMovies={addOrDelMovies}
+                savedMovies={savedMovies}
                 {...props}
                 />} 
             />

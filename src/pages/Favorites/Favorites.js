@@ -23,6 +23,7 @@ function Favorites(props) {
                 movie={movie}
                 genres={genres}
                 addOrDelMovies={props.addOrDelMovies}
+                savedMovies={props.savedMovies}
               />
             )
           })}
