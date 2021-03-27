@@ -9,7 +9,12 @@ import PropTypes from 'prop-types'
 
 function MovieCard({ movie, genres, addOrDelMovies, savedMoviesId }) {
   const [genresList, setGenresList] = useState([])
-  const [currentStatusFav] = useState(savedMoviesId.includes(movie.id))
+  const [currentStatusFav, setCurrentStatusFav] = useState(savedMoviesId.includes(movie.id))
+
+  useEffect(() => {
+    setCurrentStatusFav(savedMoviesId.includes(movie.id))
+  }, [savedMoviesId])
+  
 
   function getNameGenres(movieProps, genresProps) {
     let newGenres = []

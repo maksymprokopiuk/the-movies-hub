@@ -14,7 +14,7 @@ function MovieDetail(props) {
   const [movie, setMovie] = useState({})
   const [currentMovieGenres, setCurrentMovieGenres] = useState([])
   const [recommendedMovies, setRecommendedMovies] = useState([])
-  const [currentStatusFav] = useState(false)
+  const [currentStatusFav, setCurrentStatusFav] = useState()
 
 
 
@@ -38,6 +38,7 @@ function MovieDetail(props) {
             setIsLoaded(true)
             setMovie(data)
             setCurrentMovieGenres(data.genres.map(item => item.name))
+            setCurrentStatusFav(props.savedMoviesId.includes(data.id))
           },
           (error) => {
             setIsLoaded(true);
@@ -71,6 +72,10 @@ function MovieDetail(props) {
       }]
     )
   }
+
+  useEffect(() => {
+    setCurrentStatusFav(props.savedMoviesId.includes(movie.id))
+  }, [props.savedMoviesId])
 
   if (error) {
     return <div>Error: {error.message}</div>;

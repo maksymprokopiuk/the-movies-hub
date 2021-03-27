@@ -9,7 +9,7 @@ import Favorites from './pages/Favorites/Favorites'
 
 function App() {
   const [movies, setMovies] = useState(getMoviesLocalStorage)
-  const [savedMoviesId] = useState(getSavedIdLocalStorage)
+  const [savedMoviesId, setSavedMoviesId] = useState(getSavedIdLocalStorage)
 
   function getMoviesLocalStorage() {
     return localStorage.getItem('movies') ? JSON.parse(localStorage.getItem('movies')) : []
@@ -32,6 +32,7 @@ function App() {
     } else {
       removeMovie(movie[0].id)
     }
+    setSavedMoviesId(getSavedIdLocalStorage)
   }
 
   function getSavedIdLocalStorage() {
