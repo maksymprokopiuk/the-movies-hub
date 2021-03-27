@@ -1,9 +1,9 @@
 How to use this project
 
-1 Git clone to your computer 'git clone 'https://github.com/maksymprokopiuk/the-movies-hub.git''
-2 npm i
-3 Create '.env' file in root of the project with an api-key 'REACT_APP_API_KEY = "9e99652000b4501a15810f2ca144bc9b"'
-4 npm start
+1 Git clone to your computer 'git clone 'https://github.com/maksymprokopiuk/the-movies-hub.git''\
+2 npm i\
+3 Create '.env' file in root of the project with an api-key 'REACT_APP_API_KEY = "9e99652000b4501a15810f2ca144bc9b"'\
+4 npm start\
 
 https://the-movies-hub.herokuapp.com/
 
