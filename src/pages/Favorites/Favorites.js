@@ -22,31 +22,33 @@ function Favorites(props) {
     fetchGenres()
   }, [])
 
-  if (!(movies.length > 0)) {
-    return (
-    <div className="favorite">
-      <h3>
-        Favorites page is empty. <Link to={'/'}>Let's go to search you favorite movies!</Link>
-      </h3>
-    </div>
-    )
-  } else {
-    return (
-      <div className="movie-card-container">
-        {movies.map(movie => {
-            return (
-              <MovieCard
-                key={movie.id}
-                movie={movie}
-                genres={genres}
-                addOrDelMovies={props.addOrDelMovies}
-                savedMoviesId={props.savedMoviesId}
-              />
-            )
-          })}
-      </div>
-    )
-  }
+  return (
+    <>
+      {
+        (movies.length < 0)
+          ?
+          <div className="favorite">
+            <h3>
+              Favorites page is empty. <Link to={'/'}>Let's go to search you favorite movies!</Link>
+            </h3>
+          </div>
+          :
+          <div className="movie-card-container">
+            {movies.map(movie => {
+              return (
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  genres={genres}
+                  addOrDelMovies={props.addOrDelMovies}
+                  savedMoviesId={props.savedMoviesId}
+                />
+              )
+            })}
+          </div>
+      }
+    </>
+  )
 }
 
 export default Favorites

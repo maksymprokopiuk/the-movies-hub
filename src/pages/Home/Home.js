@@ -95,33 +95,36 @@ function Home(props) {
 
 
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div style={{display: 'flex', justifyContent: 'center', margin: '.5rem'}}><div className="lds-facebook"><div></div><div></div><div></div></div></div>;
-  } else {
-    return (
-      <div>
-        <div className="search-block">
-          <input type="text" name="search" id="inputSearch" />
-          <button onClick={getSearchWord} >Search</button>
-        </div>
-        <div className="movie-card-container">
-          {movies.map(movie => {
-            return (
-              <MovieCard
-                key={movie.id}
-                movie={movie}
-                genres={genres}
-                addOrDelMovies={props.addOrDelMovies}
-                savedMoviesId={props.savedMoviesId}
-              />
-            )
-          })}
-        </div>
-      </div>
-    );
-  }
+  return (
+    <>
+      { !isLoaded && <div style={{ display: 'flex', justifyContent: 'center', margin: '.5rem' }}><div className="lds-facebook"><div></div><div></div><div></div></div></div>}
+      {
+        movies
+          ?
+          <div>
+            <div className="search-block">
+              <input type="text" name="search" id="inputSearch" />
+              <button onClick={getSearchWord} >Search</button>
+            </div>
+            <div className="movie-card-container">
+              {movies.map(movie => {
+                return (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    genres={genres}
+                    addOrDelMovies={props.addOrDelMovies}
+                    savedMoviesId={props.savedMoviesId}
+                  />
+                )
+              })}
+            </div>
+          </div>
+          :
+          <div>Error: {error.message}</div>
+      }
+    </>
+  )
 }
 
 Home.propTypes = {
